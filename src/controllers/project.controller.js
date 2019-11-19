@@ -6,7 +6,7 @@ export async function crearProyecto(req, res)
     const {name, priority, description, deliverydate } = req.body;
 
     try {
-        let nuevoProyecto = await Project.create({
+        const nuevoProyecto = await Project.create({
             name,
             priority,
             description,
@@ -30,8 +30,6 @@ export async function crearProyecto(req, res)
             data: {}
         });
     }
-
-    
 }
 
 export async function getProyectos(req, res)
