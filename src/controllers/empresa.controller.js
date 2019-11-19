@@ -1,12 +1,22 @@
 import Empresa from '../models/Empresa';
 
-export async function createEmpresa(req, res)
-{
-    const {nombre, descripcion, direccion, latitud, longitud, correo, telefono, avatar,
-          idcategoria, usuario, clave, estado} = req.body;
+export async function createEmpresa(req, res) {
+    const {
+        nombre,
+        descripcion,
+        direccion,
+        latitud,
+        longitud,
+        correo,
+        telefono,
+        avatar,
+        idcategoria,
+        usuario,
+        clave,
+        estado
+    } = req.body;
 
-    try
-    {
+    try {
         let nuevaEmpresa = await Empresa.create({
             nombre,
             descripcion,
@@ -20,101 +30,113 @@ export async function createEmpresa(req, res)
             usuario,
             clave,
             estado
-        },
-        {
+        }, {
             fields: ['nombre', 'descripcion', 'direccion', 'latitud', 'longitud', 'correo', 'telefono',
-                     'avatar', 'idcategoria', 'usuario', 'clave', 'estado']
+                'avatar', 'idcategoria', 'usuario', 'clave', 'estado'
+            ]
         });
 
-        if(nuevaEmpresa)
-        {
+        if (nuevaEmpresa) {
             return res.json({
                 mensaje: "Empresa creada satisfactoriamente.",
                 data: nuevaEmpresa
             });
         }
-    } catch(e)
-    {
+    } catch (e) {
         res.status(500).json({
             mensaje: 'Vaya, algo ha ido mal :(',
-            data: {e}
+            data: { e }
         });
     }
 }
 
-export async function getEmpresas(req, res)
-{
-    try
-    {
+export async function getEmpresas(req, res) {
+    try {
         const empresas = await Empresa.findAll({
             where: {
                 estado: 1
             },
             attributes: ['id', 'nombre', 'descripcion', 'direccion', 'correo', 'telefono', 'latitud', 'longitud',
-                         'avatar', 'idcategoria', 'usuario', 'clave', 'estado', 'updatedAt', 'createdAt']
+                'avatar', 'idcategoria', 'usuario', 'clave', 'estado', 'updatedAt', 'createdAt'
+            ]
         });
 
         return res.json({
             data: empresas
         });
 
-    } catch(e)
-    {
+    } catch (e) {
         res.status(500).json({
             mensaje: 'Vaya, algo ha ido mal :(',
-            data: {e}
+            data: { e }
         });
     }
 }
 
-export async function getOneEmpresa(req, res)
-{
+export async function getOneEmpresa(req, res) {
     const { id } = req.params;
 
-    try
-    {
+    try {
         const empresa = await Empresa.findOne({
             where: {
                 id
             },
-            attributes: ['id','nombre', 'descripcion', 'direccion', 'correo', 'telefono', 'latitud', 'longitud',
-                         'avatar', 'idcategoria', 'usuario', 'clave', 'estado', 'updatedAt', 'createdAt']
+            attributes: ['id', 'nombre', 'descripcion', 'direccion', 'correo', 'telefono', 'latitud', 'longitud',
+                'avatar', 'idcategoria', 'usuario', 'clave', 'estado', 'updatedAt', 'createdAt'
+            ]
         });
 
-        res.json({
+        return res.json({
             data: empresa
         });
-    } catch(e)
-    {
+    } catch (e) {
         res.status(500).json({
             mensaje: 'Vaya, algo ha ido mal :(',
-            data: {e}
+            data: { e }
         });
     }
 }
 
-export async function updateEmpresa(req, res)
-{
+export async function updateEmpresa(req, res) {
     const { id } = req.params;
-    const { nombre, descripcion, direccion, latitud, longitud, correo, telefono, avatar,
-        idcategoria, usuario, clave, estado } = req.body;
+    const {
+        nombre,
+        descripcion,
+        direccion,
+        latitud,
+        longitud,
+        correo,
+        telefono,
+        avatar,
+        idcategoria,
+        usuario,
+        clave,
+        estado
+    } = req.body;
 
-    try
-    {    
+    try {
         const updateEmpresa = await Empresa.update({
-            nombre, descripcion, direccion, latitud, longitud, correo,
-            telefono, avatar, idcategoria, usuario, clave, estado
-        },
-        {
-            where: {id}
+            nombre,
+            descripcion,
+            direccion,
+            latitud,
+            longitud,
+            correo,
+            telefono,
+            avatar,
+            idcategoria,
+            usuario,
+            clave,
+            estado
+        }, {
+            where: { id }
         });
-    
+
         res.json({
             mensaje: "Empresa actualizada",
             data: updateEmpresa
         });
-    } catch(e)
-    {
+    } catch (e) {
         res.status(500).json({
             mensaje: "Vaya! Algo ha ido mal :(",
             data: e
@@ -122,7 +144,20 @@ export async function updateEmpresa(req, res)
     }
 }
 
-export async function getEmpresasByCategoria(req, res)
-{
-    
+export async function getEmpresasByCategoria(req, res) {
+    const { idcategoria } = req.params;
+
+    try {
+        const empresas = await Empresa.findAll({
+            attributes: ['nombre', 'descripcion', 'direccion', 'telefono', 'avatar'],
+            where: { idcategoria }
+        });
+        res.json({ empresas });
+
+    } catch (e) {
+        res.status(500).json({
+            mensaje: "Vaya, algo ha ido mal :(",
+            data: e
+        })
+    }
 }

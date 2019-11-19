@@ -9,6 +9,6 @@ router.get('/', getProductos);
 router.get('/:id', getOneProducto);
 router.delete('/:id', deleteProducto);
 router.put('/:id', updateProducto);
-router.get('/empresa/idEmpresa', getProductosByEmpresa);
+router.get('/empresa/:idempresa', getProductosByEmpresa);
 
 export default router;

@@ -2,29 +2,23 @@ import Sequelize from 'sequelize';
 import { sequelize } from '../database/database';
 
 const Producto = sequelize.define('productos', {
-    id: 
-    {
+    id: {
         type: Sequelize.INTEGER,
         primaryKey: true
     },
-    nombre:
-    {
+    nombre: {
         type: Sequelize.TEXT
     },
-    descripcion:
-    {
+    descripcion: {
         type: Sequelize.TEXT
     },
-    idEmpresa:
-    {
+    idempresa: {
         type: Sequelize.INTEGER
     },
-    avatar:
-    {
+    avatar: {
         type: Sequelize.TEXT
     },
-    precio:
-    {
+    precio: {
         type: Sequelize.DOUBLE
     }
 });
