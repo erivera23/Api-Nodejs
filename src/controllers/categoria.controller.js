@@ -73,7 +73,7 @@ export async function updateCategoria(req, res) {
         });
 
         res.json({
-            mensaje: "Empresa actualizada con éxito",
+            mensaje: "Categoría actualizada con éxito",
             data: actualizaCategoria
         });
 
