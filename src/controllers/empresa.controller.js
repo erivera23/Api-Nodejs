@@ -13,7 +13,8 @@ export async function createEmpresa(req, res) {
         idcategoria,
         usuario,
         clave,
-        estado
+        estado,
+        fechanacimiento
     } = req.body;
 
     try {
@@ -29,10 +30,11 @@ export async function createEmpresa(req, res) {
             idcategoria,
             usuario,
             clave,
-            estado
+            estado,
+            fechanacimiento
         }, {
             fields: ['nombre', 'descripcion', 'direccion', 'latitud', 'longitud', 'correo', 'telefono',
-                'avatar', 'idcategoria', 'usuario', 'clave', 'estado'
+                'avatar', 'idcategoria', 'usuario', 'clave', 'estado', 'fechanacimiento'
             ]
         });
 
@@ -57,7 +59,7 @@ export async function getEmpresas(req, res) {
                 estado: 1
             },
             attributes: ['id', 'nombre', 'descripcion', 'direccion', 'correo', 'telefono', 'latitud', 'longitud',
-                'avatar', 'idcategoria', 'usuario', 'clave', 'estado', 'updatedAt', 'createdAt'
+                'avatar', 'idcategoria', 'usuario', 'clave', 'estado', 'updatedAt', 'createdAt', 'fechanacimiento'
             ]
         });
 
@@ -82,7 +84,7 @@ export async function getOneEmpresa(req, res) {
                 id
             },
             attributes: ['id', 'nombre', 'descripcion', 'direccion', 'correo', 'telefono', 'latitud', 'longitud',
-                'avatar', 'idcategoria', 'usuario', 'clave', 'estado', 'updatedAt', 'createdAt'
+                'avatar', 'idcategoria', 'usuario', 'clave', 'estado', 'updatedAt', 'createdAt', 'fechanacimiento'
             ]
         });
 
@@ -111,7 +113,8 @@ export async function updateEmpresa(req, res) {
         idcategoria,
         usuario,
         clave,
-        estado
+        estado,
+        fechanacimiento
     } = req.body;
 
     try {
@@ -127,7 +130,8 @@ export async function updateEmpresa(req, res) {
             idcategoria,
             usuario,
             clave,
-            estado
+            estado,
+            fechanacimiento
         }, {
             where: { id }
         });
@@ -149,7 +153,7 @@ export async function getEmpresasByCategoria(req, res) {
 
     try {
         const empresas = await Empresa.findAll({
-            attributes: ['nombre', 'descripcion', 'direccion', 'telefono', 'avatar'],
+            attributes: ['nombre', 'descripcion', 'direccion', 'telefono', 'avatar', 'fechanacimiento'],
             where: { idcategoria }
         });
         res.json({ empresas });
