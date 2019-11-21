@@ -8,57 +8,48 @@ const Empresa = sequelize.define('empresa', {
         type: Sequelize.INTEGER,
         primaryKey: true
     },
-    nombre:
-    {
+    nombre: {
         type: Sequelize.TEXT
     },
-    descripcion:
-    {
+    descripcion: {
         type: Sequelize.TEXT
     },
-    direccion:
-    {
+    direccion: {
         type: Sequelize.TEXT
     },
-    latitud:
-    {
+    latitud: {
         type: Sequelize.TEXT
     },
-    longitud:
-    {
+    longitud: {
         type: Sequelize.TEXT
     },
-    correo:
-    {
+    correo: {
         type: Sequelize.TEXT
     },
-    telefono:
-    {
+    telefono: {
         type: Sequelize.TEXT
     },
-    avatar:
-    {
+    avatar: {
         type: Sequelize.TEXT
     },
-    idcategoria:
-    {
+    idcategoria: {
         type: Sequelize.INTEGER
     },
-    usuario:
-    {
+    usuario: {
         type: Sequelize.TEXT
     },
-    clave:
-    {
+    clave: {
         type: Sequelize.TEXT
     },
-    estado:
-    {
+    estado: {
         type: Sequelize.INTEGER
+    },
+    fechanacimiento: {
+        type: Sequelize.DATE
     }
 });
 
-Empresa.hasMany(Producto, { foreignKey: 'idEmpresa', sourceKey: 'id'});
-Producto.belongsTo(Empresa, { foreignKey: 'idEmpresa', sourceKey: 'id'});
+Empresa.hasMany(Producto, { foreignKey: 'idEmpresa', sourceKey: 'id' });
+Producto.belongsTo(Empresa, { foreignKey: 'idEmpresa', sourceKey: 'id' });
 
 export default Empresa;
