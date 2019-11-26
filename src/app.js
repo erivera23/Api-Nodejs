@@ -1,5 +1,9 @@
+const PORT = process.env.PORT || 4000;
 import express, { json } from 'express';
 import morgan from 'morgan';
+import path from 'path';
+import multer from 'multer';
+
 import routerEmpresa from './routes/empresa';
 import routerProducto from './routes/productos';
 import routerCategoria from './routes/categorias';
