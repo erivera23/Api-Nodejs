@@ -1,55 +1,8 @@
 import Empresa from '../models/Empresa';
 
+
 export async function createEmpresa(req, res) {
-    const {
-        nombre,
-        descripcion,
-        direccion,
-        latitud,
-        longitud,
-        correo,
-        telefono,
-        avatar,
-        idcategoria,
-        usuario,
-        clave,
-        estado,
-        fechanacimiento
-    } = req.body;
-
-    try {
-        let nuevaEmpresa = await Empresa.create({
-            nombre,
-            descripcion,
-            direccion,
-            latitud,
-            longitud,
-            correo,
-            telefono,
-            avatar,
-            idcategoria,
-            usuario,
-            clave,
-            estado,
-            fechanacimiento
-        }, {
-            fields: ['nombre', 'descripcion', 'direccion', 'latitud', 'longitud', 'correo', 'telefono',
-                'avatar', 'idcategoria', 'usuario', 'clave', 'estado', 'fechanacimiento'
-            ]
-        });
-
-        if (nuevaEmpresa) {
-            return res.json({
-                mensaje: "Empresa creada satisfactoriamente.",
-                data: nuevaEmpresa
-            });
-        }
-    } catch (e) {
-        res.status(500).json({
-            mensaje: 'Vaya, algo ha ido mal :(',
-            data: { e }
-        });
-    }
+    console.log(req.hostname + req.file.path);
 }
 
 export async function getEmpresas(req, res) {
